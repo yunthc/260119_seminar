@@ -1,24 +1,39 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
 
 document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
+  <div class="chat-container">
+    <div class="messages" id="messages">
+      <div class="message bot">안녕하세요! 무엇을 도와드릴까요?</div>
     </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
+    <form class="chat-form" id="chat-form">
+      <input type="text" id="message-input" placeholder="메시지를 입력하세요..." autocomplete="off" />
+      <button type="submit">전송</button>
+    </form>
   </div>
 `
 
-setupCounter(document.querySelector('#counter'))
+const messagesContainer = document.getElementById('messages')
+const chatForm = document.getElementById('chat-form')
+const messageInput = document.getElementById('message-input')
+
+const appendMessage = (text, sender) => {
+  const messageDiv = document.createElement('div')
+  messageDiv.className = `message ${sender}`
+  messageDiv.textContent = text
+  messagesContainer.appendChild(messageDiv)
+  messagesContainer.scrollTop = messagesContainer.scrollHeight
+}
+
+chatForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+  const message = messageInput.value.trim()
+  if (!message) return
+
+  appendMessage(message, 'user')
+  messageInput.value = ''
+
+  // 간단한 봇 응답 시뮬레이션
+  setTimeout(() => {
+    appendMessage(`Echo: ${message}`, 'bot')
+  }, 300)
+})

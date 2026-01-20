@@ -8,12 +8,31 @@
   </head>
   <body>
     <div id="app">
-      <div class="chat-container">
-        <div id="messages" class="messages"></div>
-        <form id="chat-form" class="chat-form">
-          <input type="text" id="message-input" placeholder="메시지를 입력하세요..." autocomplete="off" />
-          <button type="submit">전송</button>
-        </form>
+      <div class="app-layout">
+        <aside class="sidebar">
+          <div class="sidebar-header">
+            <h3>Chatbots</h3>
+          </div>
+          <nav class="sidebar-nav">
+            <a href="/" class="nav-item active">
+              <span class="icon">😐</span>
+              Simple Bot
+            </a>
+            <a href="/advancedchatbot.html" class="nav-item">
+              <span class="icon">🤖</span>
+              Advanced AI
+            </a>
+          </nav>
+        </aside>
+        <main class="main-content">
+          <div class="chat-container">
+            <div id="messages" class="messages"></div>
+            <form id="chat-form" class="chat-form">
+              <input type="text" id="message-input" placeholder="메시지를 입력하세요..." autocomplete="off" />
+              <button type="submit">전송</button>
+            </form>
+          </div>
+        </main>
       </div>
     </div>
     <script type="module" src="/main.js"></script>
